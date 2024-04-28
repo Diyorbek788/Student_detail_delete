@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Detail</title>
+</head>
+<body>
+    <h1>Student Detail</h1>
+    <p><strong>Ism:</strong> {{ student.first_name }}</p>
+    <p><strong>Familiya:</strong> {{ student.last_name }}</p>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>O'qituvchi:</strong> {{ student.teacher }}</p>
+    <p><strong>Hobbi:</strong>
+    {% for hobby in student.hobbies.all %}
+        {{ hobby.name }}
+        {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    </p>
+    <form action="{% url 'student_delete' student_id=student.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">O'chirish</button>
+    </form>
+</body>
+</html>
